@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+timescaledb:
+image: timescale/timescaledb:latest-pg14
+environment:
+POSTGRES_PASSWORD: example
+POSTGRES_USER: postgres
+POSTGRES_DB: mobility
+ports: ['5432:5432']
+volumes:
+- timescale-data:/var/lib/postgresql/data
+healthcheck:
+test: ["CMD-SHELL", "pg_isready -U postgres"]
+interval: 10s
+retries: 5
+
+
+backend:
+build: ./backend
+depends_on:
+- timescaledb
+ports: ['8000:8000']
+environment:
+DATABASE_URL: postgres://postgres:example@timescaledb:5432/mobility
+
+
+frontend:
+build: ./frontend
+ports: ['3000:3000']
+depends_on:
+- backend
+
+
+mock-generator:
+image: python:3.11-slim
+command: bash -c "pip install pandas requests && python /app/generator.py"
+volumes:
+- ./mock:/app
+depends_on:
+- backend
+
+
+volumes:
+timescale-data:

@@ -1,0 +1,11 @@
+groups:
+  - name: anomalies.rules
+    rules:
+      - alert: HighAnomalyRate
+        expr: sum(rate(anomalies_total[5m])) > 5
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High anomalies per 5m"
+          description: "More than 5 anomalies per 5m across sensors."

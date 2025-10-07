@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+databases[postgresql]
+asyncpg
+sqlalchemy
+pydantic
+sse-starlette
+psycopg2-binary
+prometheus-fastapi-instrumentator
+prometheus-client
+pandas
+joblib
+prophet
+scikit-learn
+geopy
+python-dotenv

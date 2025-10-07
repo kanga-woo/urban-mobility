@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Anomalies over time",
+      "targets": [
+        {
+          "expr": "sum(rate(anomalies_total[1m]))",
+          "legendFormat": "total"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      }
+    }
+  ],
+  "schemaVersion": 16,
+  "title": "Anomalies Dashboard"
+}

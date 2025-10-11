@@ -1,9 +1,9 @@
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm ci --silent
+COPY package*.json ./
+RUN npm install --silent
 COPY . .
 RUN npm run build
 RUN npm install -g serve
-EXPOSE 3000
+EXPOSE 5173
 CMD ["serve","-s","build","-l","3000"]
